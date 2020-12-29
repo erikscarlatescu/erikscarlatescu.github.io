@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Voxel octrees (and pixel quadtrees)</title>
+		<link rel="stylesheet" href="../main_page_styles.css">
+		<!-- For aesthetically pleasing math typesetting using MathJax
+        https://www.mathjax.org/-->
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+            }
+        });
+        </script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    </head>
+    <body>
+        <div class="main_content">
+            <a href="../index.html">Back to main page</a>
+            <canvas></canvas>
+            <script src="quadtrees.js"></script>
+            <p>Recently, I've been obsessed with making a voxel game similar to Minecraft. One thing I've read is how commonly octrees are used for this purpose. Before I try making anything with octrees, 
+                I wanted to see if I could even use quadtrees, the more mild 2-dimensional cousins of octrees.</p>
+            <p>The canvas above is sort of like a picture in MS Paint that you can draw on, but it also visualizes the quadtree structure. In this specific case at this scale, the quadtree seems to be far less efficient
+                 than just using an array, but my sole purpose in making this was to better understand the concept. Use the mouse to draw and see how the quadtree changes.</p>
+            </p>
+            </p>
+            </div>
+    </body>
+</html>

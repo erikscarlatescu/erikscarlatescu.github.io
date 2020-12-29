@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Photomosaic Generator</title>
+		<link rel="stylesheet" href="../main_page_styles.css">
+		<link rel="stylesheet" href="photomosaicstyles.css">
+		<!-- For aesthetically pleasing math typesetting using MathJax
+        https://www.mathjax.org/-->
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+            }
+        });
+        </script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    </head>
+    <body>
+        <div class="main_content">
+            <a href="../index.html">Back to main page</a>
+            <h2>Photomosiac generator</h2>
+            <p>In my U.S. History class, we were assigned to create a photomosaic relating to World War 1. For anyone who doesn't know what it is, it's basically
+                a larger image made up of smaller ones, like the one in the thumbnail for this page.</p>
+            <p>Anyways, I decided to have a little fun with this and make the computer 
+                do it for me on a scale much bigger than I could ever hope to do. I started with the base image below:
+            </p>
+            <img class="mosaicimg" src="trenchpicoriginal.jpg">
+            <p>Now I needed a quick way to download the first few hundred search results for World War 1 on Google. For this, I used <a href="https://github.com/hardikvasa/google-images-download">this python library</a>
+                 to get the first few hundred images that pop up. The program ran out of images after it downloaded roughly 900 of them.</p>
+            <p>Then I sliced the base image into rectangular regions with a total of 32 across and 25 down. These subsections were sorted from lowest to highest average brightness.
+                The downloaded images were sorted in a similar fashion. The algorithm that follows is nothing complicated: each downloaded image was then matched with a subsection of similar brightness index.
+                This is the result:
+            </p>
+            <img class="mosaicimg" src="otherphotomosaictries/try1.jpg">
+            <p>It seems to work, but not well enough. My theory is that the distribution of brightnesses in the downloaded images is too far from that of the base image subsections.
+                In an attempt to account for this, I adjusted the brightness of each downloaded image to better match the base image. This produces a more well-defined result.
+            </p>
+            <img class="mosaicimg" src="otherphotomosaictries/try2.jpg">
+            <p>However, the original image still doesn't come through clearly enough. So, I blended it with the original image just a bit:</p>
+            <img class="mosaicimg" src="otherphotomosaictries/try3.jpg">
+            <p>One final idea I had was to duplicate each downloaded image 10 times so that we can have an even more well-defined photomosaic.
+                This has the unfortunate effect of causing the same images to cluster around each other because they have similar brightness.
+                But the final result is good enough that I think it's worth it.
+            </p>
+            <img class="mosaicimg" src="otherphotomosaictries/try5_a.jpg">
+            <p>We were also required to make a second photomosaic. My program can't sort with colors, so I just blended the colored base image more aggressively and still got this good result:</p>
+            <img class="mosaicimg" src="otherphotomosaictries/hereitis_secondposter.jpg">
+            <p>One final note: these images are at a decreased resolution so the webpage loads more quickly, so that is why it may be difficult to distinguish individual subimages.</p>
+            </div>
+    </body>
+</html>
