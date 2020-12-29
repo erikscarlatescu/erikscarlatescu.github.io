@@ -157,7 +157,6 @@ class Quadtree {
 
         let queue = [start];
         while (queue.length > 0) {
-            console.log("QUEUE LENGTH IS NOW: " + queue.length);
             let current = queue.shift();
             if (current === undefined) {
                 continue;
@@ -536,9 +535,9 @@ export const Quadtrees = () => {
                         case 'f':
                             quadtree.floodFill(mousex, mousey, selectedType);
                             break;
-                        case 's':
-                            quadtree.selectTest(mousex, mousey);
-                            break;
+                        //case 's':
+                            //quadtree.selectTest(mousex, mousey);
+                            //break;
                     }
                 }}
             />
@@ -548,7 +547,8 @@ export const Quadtrees = () => {
             <p>Select a color to draw with by clicking on its square above. Then simply click and drag to draw. Press 'f' to perform a floodfill at the location of the mouse cursor with the selected color.</p>
             <p>Recently, I've been obsessed with making a voxel game similar to Minecraft. One thing I've read is how commonly octrees are used for this purpose. Before I try making anything with octrees, 
                 I wanted to see if I could even use quadtrees, the more mild 2-dimensional cousins of octrees.</p>
-            <p>The canvas above is sort of like a picture in MS Paint that you can draw on, but it also visualizes the quadtree structure. For the most part, this wasn't too hard to implement, but getting the flood fill to work properly was somewhat of a challenge.</p>
+            <p>The canvas above is sort of like a picture in MS Paint that you can draw on, but it also visualizes the quadtree structure. For the most part, this wasn't too hard to implement, 
+                but getting the flood fill to work properly was somewhat of a challenge. Press 'o' to make the brush larger and 'i' to make it smaller.</p>
         </div>
     );
 }
