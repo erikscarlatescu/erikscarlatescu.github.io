@@ -544,11 +544,11 @@ export const Quadtrees = () => {
             <div className="colorButtonDiv"> {colorButtons} </div>
             <input onChange={handleCheckboxChange.bind(this)} defaultChecked={true} type="checkbox" id="gridRenderCheckbox"/>
             <label htmlFor="gridRenderCheckbox">Render grid</label>
-            <p>Select a color to draw with by clicking on its square above. Then simply click and drag to draw. Press 'f' to perform a floodfill at the location of the mouse cursor with the selected color.</p>
+            <p>Select a color to draw with by clicking on its square above. Then simply click and drag to draw. Press 'f' to perform a floodfill at the location of the mouse cursor with the selected color. Press 'o' to make the brush larger and 'i' to make it smaller.</p>
             <p>Recently, I've been obsessed with making a voxel game similar to Minecraft. One thing I've read is how commonly octrees are used for this purpose. Before I try making anything with octrees, 
                 I wanted to see if I could even use quadtrees, the more mild 2-dimensional cousins of octrees.</p>
             <p>The canvas above is sort of like a picture in MS Paint that you can draw on, but it also visualizes the quadtree structure. For the most part, this wasn't too hard to implement, 
-                but getting the flood fill to work properly was somewhat of a challenge. Press 'o' to make the brush larger and 'i' to make it smaller.</p>
+                but getting the flood fill to work properly was somewhat of a challenge.</p>
         </div>
     );
 }
