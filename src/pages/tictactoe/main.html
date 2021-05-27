@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Visualizing point charges in conductor</title>
+		<link rel="stylesheet" href="../main_page_styles.css">
+		<!-- For aesthetically pleasing math typesetting using MathJax
+        https://www.mathjax.org/-->
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+            }
+        });
+        </script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    </head>
+    <body>
+        <div class="main_content">
+            <a href="../index.html">Back to main page</a>
+            <canvas></canvas>
+            <script src="conductors.js"></script>
+            <p>While learning electrostatics for AP physics, my book made the claim that in an electrically neutral conductor, the electric field inside is zero and there is only a net charge on the surface.</p>
+            <p>So, I decided to try to get some more intuition for this claim by simulating a conductor as seen above. The positive nuclei of atoms are fixed in place and their electrons are free to flow around.
+                 I simply use Coulomb's law to calculate the attraction between every charge, and even with this many charges, it works well enough with javascript.
+            </p>
+            <p>I did make a slight modification to Coulomb's law. Basically, it seems that the charge only settles on the surface in 3 dimensions because the electric force obeys an inverse-square relationship with distance.
+                 However, this is a 2 dimensional simulation, so to get the same behavior, an inverse-square law no longer works. Instead, I modified it to be only inverse.
+            </p>
+            <p>This is still somewhat low resolution as far as atoms and electrons in a conductor go, so the result doesn't seem to be very clearly visible. But still, it does seem to work pretty well just by looking at it 
+               (which admittedly isn't a very rigorous metric). Some further changes I could make to pursue this further would be to rewrite it in C++ to get enough of a performance boost to allow a finer grid to be simulated.</p>
+            </div>
+    </body>
+</html>

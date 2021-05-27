@@ -9,6 +9,7 @@ import MsPaintMatrix from './pages/mspaintmatrix/MsPaintMatrix';
 import PhotoMosaic from './pages/photomosaic/PhotoMosaic';
 import Mandelbrot from './pages/mandelbrot/Mandelbrot';
 import Quadtrees from './pages/quadtrees/Quadtrees';
+import Tictactoe from './pages/tictactoe/Tictactoe';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route exact path="/photomosaic" component={PhotoMosaic} />
         <Route exact path="/mandelbrot" component={Mandelbrot} />
         <Route exact path="/quadtrees" component={Quadtrees} />
+        <Route exact path="/tictactoe" component={Tictactoe} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
