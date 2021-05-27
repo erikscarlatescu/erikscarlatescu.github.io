@@ -4,6 +4,7 @@ import { Canvas } from '../../util/Canvas';
 import BoardState, { pickMoveRandomly, aiMove, buildLookup } from './Board';
 
 let board: BoardState = BoardState.fromNumber(0);
+let boardDrawTimes: number[] = Array<number>(9).fill(0);
 let lookup: { [state: number] : string} = {};
 
 let player1AI = true;
@@ -12,7 +13,8 @@ let player2AI = false;
 let player1Turn = true;
 let lastMoveTime = Date.now();
 
-const aiMoveTime = 300;
+const aiMoveTime = 75;
+const animTime = 250;
 
 function draw(c: CanvasRenderingContext2D, width: number, height: number): void {
     // updates game
@@ -23,6 +25,7 @@ function draw(c: CanvasRenderingContext2D, width: number, height: number): void 
         lastMoveTime = currentTime;
         let move = aiMove(board, lookup);
         board.makeMove(move[0], move[1]);
+        boardDrawTimes[move[0]] = lastMoveTime;
 
         // changes player turn
         player1Turn = !player1Turn;
@@ -56,23 +59,35 @@ function drawBoardState(c: CanvasRenderingContext2D, board: BoardState, width: n
         c.stroke();
     }
 
+    let currentTime = Date.now();
+
     // draws Xs and Os on board
     for (var y = 0; y < 3; y++) {
         for (var x = 0; x < 3; x++) {
             if (board.getState()[y*3 + x] === 'X') {
-                c.beginPath();
-                c.moveTo(x * width/3 + width/6 - symbolsize/2, y * height/3 + height/6 - symbolsize/2);
-                c.lineTo(x * width/3 + width/6 + symbolsize/2, y * height/3 + height/6 + symbolsize/2);
-                c.stroke();
+                // since each bar of the X takes half the time to draw, we speed up each bar
+                let animFraction1 = Math.min(1, (currentTime - boardDrawTimes[y*3 + x]) / (animTime*0.5));
 
                 c.beginPath();
-                c.moveTo(x * width/3 + width/6 + symbolsize/2, y * height/3 + height/6 - symbolsize/2);
-                c.lineTo(x * width/3 + width/6 - symbolsize/2, y * height/3 + height/6 + symbolsize/2);
+                c.moveTo(x * width/3 + width/6 - symbolsize/2, y * height/3 + height/6 - symbolsize/2);
+                c.lineTo(x * width/3 + width/6 - symbolsize/2 + symbolsize*animFraction1, y * height/3 + height/6 - symbolsize/2 + symbolsize*animFraction1);
                 c.stroke();
+
+                // since each bar of the X takes half the time to draw, we delay the second bar by half the time and speed it up
+                if (animFraction1 >= 1) {
+                    let animFraction2 = Math.min(1, (currentTime - boardDrawTimes[y*3 + x] - animTime*0.5) / (animTime*0.5));
+
+                    c.beginPath();
+                    c.moveTo(x * width/3 + width/6 + symbolsize/2, y * height/3 + height/6 - symbolsize/2);
+                    c.lineTo(x * width/3 + width/6 + symbolsize/2 - symbolsize*animFraction2, y * height/3 + height/6 - symbolsize/2 + symbolsize*animFraction2);
+                    c.stroke();
+                }
             }
             else if (board.getState()[y*3 + x] === 'O') {
+                let animFraction = Math.min(1, (currentTime - boardDrawTimes[y*3 + x]) / animTime);
+
                 c.beginPath();
-                c.arc(x * width/3 + width/6, y * height/3 + height/6, symbolsize/2, 0, 2 * Math.PI);
+                c.arc(x * width/3 + width/6, y * height/3 + height/6, symbolsize/2, -Math.PI*0.5, -Math.PI*0.5 + 2 * Math.PI * animFraction);
                 c.stroke();
             }
         }
@@ -120,6 +135,7 @@ export const Tictactoe = () => {
                     board.makeMove(index, currentPlayer);
 
                     lastMoveTime = Date.now();
+                    boardDrawTimes[index] = lastMoveTime;
                     player1Turn = !player1Turn;
                 }}
             />
